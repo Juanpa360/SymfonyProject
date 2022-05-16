@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<!-- Page content-->
+        <div class="container">
+            <div class="row">
+                <!-- Blog entries-->
+                <div class="col-lg-8">
+                    <!-- Featured blog post-->
+                    {% for tapa in tapas %}
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="small text-muted">{{(tapa.fechaCreacion | date('d-m-Y'| striptags))}}</div>
+                            <a href="{{ path('post',{'id':tapa.id})}}"><h2 class="card-title">{{tapa.titulo}}</h2></a>
+                            <h6 class="card-subtitle mb-2 text-muted">{{tapa.autor}}</h6>
+                            <p class="card-text">{{tapa.descripcion}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                   
+                    <!-- Pagination-->
+                    <nav aria-label="Pagination">
+                        <hr class="my-0" />
+                        <ul class="pagination justify-content-center my-4">
+                        {% if actualPage>1 %}
+                           <li class="page-item"><a class="page-link" href="{{path('homepage',{page:actualPage - 1})}}"><<</a></li>
+                        {% endif %}
+                            {% for i in 1..3 %}
+                                 <li class="page-item"><a class="page-link" href="{{path('homepage',{page:i})}}">{{i}}</a></li>
+                            {% endfor %}
+                        <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
+                        <li class="page-item"><a class="page-link" href="{{path('homepage',{page:actualPage + 1})}}">>></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- Side widgets-->
+                <div class="col-lg-4">
+                    <!-- Search widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Filter</div>
+                        <div class="card-body">
+                            
+                            <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                        <br><input type="radio" id="op1" name="filt" value="op1" checked="checked">
+                                        <label for="op1">Title</label>
+                                        <input type="radio" id="op2" name="filt" value="op2">
+                                        <label for="op2">Autor</label><br>
+                                        <input type="radio" id="op3" name="filt" value="op3">
+                                        <label for="op3">Description</label>
+                                        <input type="radio" id="op4" name="filt" value="op4">
+                                        <label for="op4">Date</label>
+                                        
+                                    </ul>
+                            </div><br>
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                            </div>
+                                <div class="col-sm-6">
+                        </div>
+                    </div>
+    
+                    <!-- Side widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Welcome</div>
+                        {% if app.user %}
+                            <div class="card-body">You can create a new post here!</div>
+                            <a href="{{ path('newpost') }}"><button class="btn btn-primary" id="button-new-post" type="button">New Post!</button></a>
+                        {% else %}
+                            <div class="card-body">If you want to post, you must first <a href="{{path('login')}}">log in</a></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+    </footer>
+{% endblock %}

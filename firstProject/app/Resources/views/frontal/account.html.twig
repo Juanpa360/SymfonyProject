@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %} My account {% endblock %}
+{% block body %}
+ <!-- Header - set the background image for the header in the line below-->
+        <header class="py-5 bg-image-full" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1600x900')">
+            <div class="text-center my-5">
+                <img class="img-fluid rounded-circle mb-4" src="https://mergers.whitecase.com/images/global/placeholders/avatar-90x90.png " alt="..." />
+                <h1 class="text-white fs-3 fw-bolder">{{app.user.username}}</h1>
+                <p class="text-white-50 mb-0">Welcome!</p>
+            </div>
+        </header>
+        <!-- Content section-->
+        <section class="py-5">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h2>Your posts:</h2>
+                        {% for tapa in tapas %}
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="small text-muted">{{(tapa.fechaCreacion | date('d-m-Y'| striptags))}}</div>
+                                <a href="{{ path('post',{'id':tapa.id})}}"><h2 class="card-title">{{tapa.titulo | upper}}</h2></a>
+                                <h6 class="card-subtitle mb-2 text-muted">{{tapa.autor}}</h6>
+                                <p class="card-text">{{tapa.descripcion | lower}}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+             <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+    </footer>
+
+{% endblock %}

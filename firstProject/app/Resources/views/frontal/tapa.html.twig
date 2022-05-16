@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %} Posts {% endblock %}
+{% block body %}
+        <!-- Page content-->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1">{{tapa.titulo}}</h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">Posted on {{(tapa.fechaCreacion | date('d-m-Y'| striptags))}}, by {{tapa.autor}}</div>
+                        </header>
+                        <!-- Post content-->
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4">{{tapa.descripcion}}</p>
+                        </section>
+                    </article>
+                </div>
+                <!-- Side widgets-->
+                <div class="col-lg-4">
+                    <!-- Search widget-->
+                    <div class="card mb-4">
+                        <div class="card-header">Filter</div>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                            </div>
+                             <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                        <br><input type="radio" id="op1" name="fav_language" value="op1" checked="checked">
+                                        <label for="op1">Title</label><br>
+                                        <input type="radio" id="op2" name="fav_language" value="op2">
+                                        <label for="op2">Subtitle</label><br>
+                                        <input type="radio" id="op3" name="fav_language" value="op3">
+                                        <label for="op3">Description</label><br>
+                                        <input type="radio" id="op4" name="fav_language" value="op4">
+                                        <label for="op4">Date</label>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6">
+                        </div>
+                    </div>
+    
+                                   <!-- Categories widget-->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled mb-0">
+                                        {% if (app.user) and (app.user.username == tapa.autor or app.user.roles == ['ROLE_ADMIN']) %}
+                                        <li><a href="{{path('deletepost',{'id':tapa.id})}}">Delete</a></li>
+                                        <li><a href="{{path('newpost',{'id':tapa.id})}}">Edit</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+             <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+    </footer>
+{% endblock %}

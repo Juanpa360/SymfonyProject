@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block title %} Sign up {% endblock %}
+{% block body %}
+ <!-- Product section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6">
+                        {{form_start(form)}}
+                        {{form_widget(form)}}
+                        {{form_end(form)}}
+                    </div>
+                    <div class="col-md-6">
+                      
+                        <h1 class="display-5 fw-bolder">Sign up</h1>
+                        <div class="fs-5 mb-5">
+                        </div>
+                        <p class="lead">By continuing, you are setting up a WebBlog account and agree to our user agreement and privacy policy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock %}

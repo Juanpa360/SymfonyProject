@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %} Usuarios {% endblock %}
+{% block body %}
+ <!-- Content section-->
+        <section class="py-5">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <h2>Users list:</h2>
+                        {% for usuario in usuarios %}
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">{{usuario.username}}</h6>
+                                <p class="card-text">{{usuario.roles | join('|')}} || Activo </p>
+                                <a href="{{path('deleteuser',{'username':usuario.username})}}">Delete</a>
+                                <a href="{{path('register',{'id':usuario.id})}}">Edit</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+             <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
+    </footer>
+
+{% endblock %}
